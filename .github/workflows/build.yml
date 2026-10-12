@@ -24,8 +24,8 @@ jobs:
 
     - name: Build with buildozer
       run: |
-        yes | sdkmanager --licenses 2>/dev/null || true
-        buildozer -v android debug
+        buildozer android clean || true
+        buildozer -v android debug -- --android.accept_sdk_license=True
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
