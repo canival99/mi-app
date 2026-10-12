@@ -24,7 +24,7 @@ jobs:
 
     - name: Build with buildozer
       run: |
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
+        yes | sdkmanager --licenses 2>/dev/null || true
         buildozer -v android debug
 
     - name: Upload artifact
