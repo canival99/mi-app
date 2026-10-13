@@ -17,9 +17,6 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -31,22 +28,8 @@ jobs:
         sudo apt-get install -y git zip unzip python3-pip autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libffi-dev libssl-dev aidl
         pip install --upgrade buildozer cython
 
-        #
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdknanger --licenses || true
-
     - name: Build with buildozer
       run: |
-        #
-        yes | sdkmanager --licenses 2>/dev/null || true
-
-        #
-        buildozer android clean || true
-
-        #
-        mkdir -p ~/.buildozer/android/platform/android-sdk/licenses || true
-        yes | ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanger --licenses 2>/dev/null || true
-
-        #
         buildozer -v android debug -- --android.accept_sdk_license=True
 
     - name: Upload artifact
